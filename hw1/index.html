@@ -9,42 +9,73 @@
 <body>
     <div class="container">
         <div class="you" id="person_you">
-            <img class="mute_icon" src="./function/mute.png">
+            <div class="mute_top_right">
+                <input type="checkbox" id="mute_for_you">
+                <label for="mute_for_you"></label>
+            </div>
+            <!-- <img class="mute_icon" src="./function/mute_black.png"> -->
             <!-- <div class="mute_icon"> mute </div> -->
-            <img class="photo_you" src="./RaKutenGirls/RaKuten15.png">
-            <!-- <div class="photo_you"> photo </div> -->
+
+            <div class="main_picture">
+                <!-- 主要大頭貼 & 功能按鈕 -->
+                <img class="photo_you" src="./RaKutenGirls/RaKuten15.png">
+                <!-- 主要大頭貼 -->
+                <div class="function_button">
+                    <!-- 功能按鈕 -->
+                    <div class="function f1">
+                        <img class="fp1" src="./function/no_pin.PNG">
+                        <!-- ？？？？？為什麼 img 也要在 class 裡面才能控制大小？？？？？ -->
+                        <div class="content c1">
+                            將自己固定在主畫面
+                        </div>
+                    </div>
+                    <div class="function">
+                        <img src="./function/pic.PNG">
+                    </div>
+                    <div class="function">
+                        <img src="./function/arrow.PNG">
+                    </div>
+                </div>
+                <!-- <div class="photo_you"> photo </div> -->
+            </div>
+
             <div class="name">
                 <!-- name -->
-                <div id="pin_you"> pin </div>
+                <img id="pin_you" src="./function/pin.png">
                 <div id="name_you"> 你 </div>
             </div>
         </div>
-        <div class="others" >
-            <div class = "person" id="person_one"> 
+
+        <div class="others">
+            <div class="person" id="person_one">
                 <img class="mute_icon" src="./function/mute.png">
                 <img class="photo" src="./RaKutenGirls/RaKuten16.png">
                 <!-- <div class="photo"> photo </div> -->
                 <div class="name"> YURI </div>
-            </div> 
-            <div class = "person" id="person_two"> 
+            </div>
+
+            <div class="person" id="person_two">
                 <img class="mute_icon" src="./function/mute.png">
                 <img class="photo" src="./RaKutenGirls/RaKuten22.png">
                 <!-- <div class="photo"> photo </div> -->
                 <div class="name"> 菲菲 </div>
-            </div> 
-            <div class = "person" id="person_three"> 
+            </div>
+
+            <div class="person" id="person_three">
                 <img class="mute_icon" src="./function/mute.png">
                 <img class="photo" src="./RaKutenGirls/RaKuten28.png">
                 <!-- <div class="photo"> photo </div> -->
                 <div class="name"> 倪暄 </div>
-            </div> 
-            <div class = "person" id="person_four"> 
+            </div>
+
+            <div class="person" id="person_four">
                 <img class="mute_icon" src="./function/mute.png">
                 <img class="photo" src="./RaKutenGirls/RaKuten51.png">
                 <!-- <div class="photo"> photo </div> -->
                 <div class="name"> 籃籃 </div>
-            </div> 
-            <div class = "person" id="person_five"> 
+            </div>
+
+            <div class="person" id="person_five">
                 <img class="mute_icon" src="./function/mute.png">
                 <img class="photo" src="./RaKutenGirls/RaKuten95.png">
                 <!-- <div class="photo"> photo </div> -->
@@ -52,13 +83,35 @@
             </div>
         </div>
     </div>
+
+    <div class="bar">
+        <div id="information"> 凌晨04:00&ensp; | &ensp;Rakuten Girls </div>
+
+        <div class="bar_buttom"> 
+            <div class="mute_buttom">
+                <input type="checkbox" id="mute">
+                <label for="mute"></label>
+            </div>
+         
+            <div class="camera_buttom">
+                <input type="checkbox" id="camera">
+                <label for="camera"></label>
+            </div>
+            <img class="bar_else_buttom" src="./function/raise_hand.png">
+            <img class="bar_else_buttom" src="./function/share_full.png">
+            <img class="bar_else_buttom" src="./function/dots_full.png">
+            <img class="bar_else_buttom" id="hang_up" src="./function/hang_up_full.png">
+        </div>
+
+        <div class="other_info">
+            <img class="info_icon" src="./function/info_full.png">
+            <img class="info_icon" src="./function/people_full.png">
+            <img class="info_icon" src="./function/chat_full.png">
+            <img class="info_icon" src="./function/board_full.png">
+            <img class="info_icon" src="./function/lock_full.png">
+        </div>
+
+    </div>
 </body>
 
-<footer>
-    <div class="bar"> 
-        <div id="information"> 凌晨04:00 | RAKUTEN GIRLS </div>
-        <button id="mute_for_you" type="button"></button>
-        <!-- <img src="./function/mute_full.png"> -->
-    </div>
-</footer>
 </html>
