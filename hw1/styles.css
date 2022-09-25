@@ -68,22 +68,24 @@ body {
     flex-wrap: wrap;
     flex-direction: row;
     /* 此區塊的主軸：橫軸  */
-    padding-top: 7%;
-    padding-bottom: 10%;
+    padding-top: 5vh;
+    /* padding-top: 7%; */
+    /* padding-bottom: 10%; */
+    padding-bottom: 10vh;
 
     width: 30vw;
     height: 90vh;
     /* border: 1px solid gold; */
 
     justify-content: space-evenly;
-    align-items: stretch;
+    align-content: center;
     /* text-align: center; */
     /* vertical-align: middle; */
 }
 
 .others>div {
     aspect-ratio: 6/5;
-    height: 35%;
+    height: 20vh;
     /* width: 40%; */
     margin-bottom: 3%;
 }
@@ -91,7 +93,8 @@ body {
 #person_five {
     /* width: 60%; */
     aspect-ratio: 8/5;
-    height: 35%;
+    height: 20vh;
+    /* height: 35%; */
     border-radius: 3%;
 }
 
@@ -190,6 +193,12 @@ div.mute_top_right input[type="checkbox"]:checked+label::before {
 .c1 {
     display: none;
 }
+.c2 {
+    display: none;
+}
+.c3 {
+    display: none;
+}
 
 .f1:hover .c1 {
     display: block;
@@ -198,14 +207,51 @@ div.mute_top_right input[type="checkbox"]:checked+label::before {
     left: -4.2vh;
     color: #fff;
     font-size: .8em;
-    background: rgb(60, 64, 67);
-    opacity: 1 !important;
+    background: rgb(32, 33, 36);
+    /* opacity: 1 !important; */
     padding: 3.5%;
     border-radius: 2%;
 }
 
 .f1:hover .fp1 {
-    opacity: 1 !important;
+    /* opacity: 1 !important; */
+    background-color: rgb(32, 33, 36);
+}
+
+.f2:hover .c2 {
+    display: block;
+    position: absolute;
+    bottom: -3.5vh;
+    left: 2vh;
+    color: #fff;
+    font-size: .8em;
+    background: rgb(32, 33, 36);
+    /* opacity: 1 !important; */
+    padding: 3.5%;
+    border-radius: 2%;
+}
+
+.f2:hover .fp2 {
+    /* opacity: 1 !important; */
+    background-color: rgb(32, 33, 36);
+}
+
+.f3:hover .c3 {
+    display: block;
+    position: absolute;
+    bottom: -3.5vh;
+    left: 12vh;
+    color: #fff;
+    font-size: .8em;
+    background: rgb(32, 33, 36);
+    /* opacity: 1 !important; */
+    padding: 3.5%;
+    border-radius: 2%;
+}
+
+.f3:hover .fp3 {
+    /* opacity: 1 !important; */
+    background-color: rgb(32, 33, 36);
 }
 
 /* 自己的照片預設大小 */
@@ -371,22 +417,63 @@ div.camera_buttom input[type="checkbox"]:checked+label::before {
 
 
 /* Responsive Webb Design (RWD) */
-/* @media screen and (max-height:660px){
-    .container{
+@media screen and (max-height:600px){
+    /* .container{
         height: 90vh;
     }
     .bar{
         height: 10vh;
-    }
+    } */
     .others>div {
-        height: 21vh;
+        height: 25vh;
+        /* width: 12vw; */
         aspect-ratio: 6/5;
     }
     #person_five {
-        height: 21vh;
+        height: 25vh;
+        /* width: 16vw; */
         aspect-ratio: 8/5;
     }
-} */
+}
+
+@media screen and (max-height:500px){
+    .you {
+        width: 65vw;
+    }
+    .others {
+        width: 35vw;
+    }
+    .others>div {
+        height: 25vh;
+        /* width: 12vw; */
+        aspect-ratio: 6/5;
+    }
+    #person_five {
+        height: 25vh;
+        /* width: 16vw; */
+        aspect-ratio: 6/5;
+    }
+}
+
+@media screen and (max-height:450px){
+    .you {
+        width: 65vw;
+    }
+    .others {
+        width: 35vw;
+    }
+    .others>div {
+        height: 28vh;
+        /* width: 12vw; */
+        aspect-ratio: 6/5;
+    }
+    #person_five {
+        height: 28vh;
+        /* width: 16vw; */
+        aspect-ratio: 6/5;
+    }
+}
+
 @media screen and (max-width:1350px) {
     .you {
         width: 67.5vw;
@@ -492,7 +579,7 @@ div.camera_buttom input[type="checkbox"]:checked+label::before {
 
     .others {
         width: 100vw;
-        height: 20vh;
+        height: 25vh;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
