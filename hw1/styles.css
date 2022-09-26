@@ -541,14 +541,106 @@ div.camera_buttom input[type="checkbox"]:checked+label::before {
     align-self: right;
     align-items: center;
     margin-right: 1%;
+    position: relative;
 }
 
-.other_info>img {
+.info_icon {
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
 
+/* bar 右邊按鈕的提示 */
+.oc1 {
+    display: none;
+}
+
+.oc2 {
+    display: none;
+}
+
+.oc3 {
+    display: none;
+}
+
+.oc4 {
+    display: none;
+}
+
+.oc5 {
+    display: none;
+}
+
+.detail:hover .oc1 {
+    display: block;
+    position: absolute;
+    top: -0.3vh;
+    right: 9vw;
+    color: #fff;
+    font-size: .8em;
+    background: rgb(60, 64, 67);
+    border-radius: 2%;
+    text-align: center;
+    padding-top: 0.5vh;
+    width: 7vw;
+    height: 3vh;
+}
+.participant:hover .oc2 {
+    display: block;
+    position: absolute;
+    top: -0.3vh;
+    right: 5.75vw;
+    color: #fff;
+    font-size: .8em;
+    background: rgb(60, 64, 67);
+    border-radius: 2%;
+    text-align: center;
+    padding-top: 0.5vh;
+    width: 8vw;
+    height: 3vh;
+}
+.chat:hover .oc3 {
+    display: block;
+    position: absolute;
+    top: -0.3vh;
+    right: 1.1vw;
+    color: #fff;
+    font-size: .8em;
+    background: rgb(60, 64, 67);
+    border-radius: 2%;
+    text-align: center;
+    padding-top: 0.5vh;
+    width: 12vw;
+    height: 3vh;
+}
+.activity:hover .oc4 {
+    display: block;
+    position: absolute;
+    top: -0.3vh;
+    /* right: 20.3vw; */
+    color: #fff;
+    font-size: .8em;
+    background: rgb(60, 64, 67);
+    border-radius: 2%;
+    text-align: center;
+    padding-top: 0.5vh;
+    width: 3vw;
+    height: 3vh;
+}
+.control:hover .oc5 {
+    display: block;
+    position: absolute;
+    top: -0.3vh;
+    left: 22vw;
+    color: #fff;
+    font-size: .8em;
+    background: rgb(60, 64, 67);
+    border-radius: 2%;
+    text-align: center;
+    padding-top: 0.5vh;
+    width: 7vw;
+    height: 3vh;
+}
 
 /* Responsive Webb Design (RWD) */
 @media screen and (max-height:600px) {
@@ -572,7 +664,7 @@ div.camera_buttom input[type="checkbox"]:checked+label::before {
     }
 }
 
-@media screen and (max-height:600px) and (max-width:1300px){
+@media screen and (max-height:600px) and (max-width:1300px) {
     .others>div {
         height: 28vh;
         /* width: 12vw; */
