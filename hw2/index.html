@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Google Meet</title>
+    <!-- <link rel="stylesheet" type="text/css" href="./styles.css" /> -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <!-- <title> Digital Photo Album </title> -->
+    <link
+        rel="stylesheet" 
+        type="text/css" 
+        media="screen" 
+        href="styles.css"
+    />
+</head>
+
+<body>
+    <div class="container">
+        <div class="you" id="person_you"></div>
+        <div class="others" id="others"></div>
+    </div>
+
+    <div class="bar">
+        <div id="information"> 凌晨04:00&ensp; | &ensp;Rakuten Girls </div>
+
+        <div class="bar_buttom">
+            <div class="mute_buttom">
+                <input type="checkbox" id="mute">
+                <label for="mute"></label>
+                <div class="ct1">
+                    關閉/開啟麥克風
+                </div>
+            </div>
+
+            <div class="camera_buttom">
+                <input type="checkbox" id="camera">
+                <label for="camera"></label>
+                <div class="ct2">
+                    關閉/開啟攝影機
+                </div>
+            </div>
+            <div class="raise_hand">
+                <img class="bar_else_buttom" src="./function/raise_hand.png">
+                <div class="ct3">
+                    舉手
+                </div>
+            </div>
+            <div class="share">
+                <img class="bar_else_buttom" src="./function/share_full.png">
+                <div class="ct4">
+                    立即分享螢幕畫面
+                </div>
+            </div>
+            <div class="more_options">
+                <img class="bar_else_buttom" src="./function/dots_full.png">
+                <div class="ct5">
+                    更多選項
+                </div>
+            </div>
+            <div class="disconnect">
+                <img class="bar_else_buttom" id="hang_up" src="./function/hang_up_full.png">
+                <div class="ct6">
+                    退出通話
+                </div>
+            </div>
+        </div>
+
+        <div class="other_info">
+            <div class="detail">
+                <img class="info_icon" src="./function/info_full.png">
+                <div class="oc1">
+                    會議詳細資料
+                </div>
+            </div>
+            <div class="participant">
+                <img class="info_icon" src="./function/people_full.png">
+                <div class="oc2">
+                    顯示所有參與者
+                </div>
+            </div>
+            <div class="chat">
+                <img class="info_icon" src="./function/chat_full.png">
+                <div class="oc3">
+                    與所有參與者進行即時通訊
+                </div>
+            </div>
+            <div class="activity">
+                <img class="info_icon" src="./function/board_full.png">
+                <div class="oc4">
+                    活動
+                </div>
+            </div>
+            <div class="control">
+                <img class="info_icon" src="./function/lock_full.png">
+                <div class="oc5">
+                    主辦人控制項
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
