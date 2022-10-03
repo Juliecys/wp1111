@@ -95,18 +95,8 @@ function make_one_attendee(attendee) {
 
         // 剩自己時，成為主畫面，並填滿整個視窗
         // mainWindow = document.getElementById("person_you")
-        // 被釘選的情況
-        if (othersWindow.className === "others") {
-            if (attendees_quantity === 0) {
-                othersWindow.style.display = "none"
-
-                mainWindow.classList.remove(...mainWindow.classList)
-                mainWindow.classList.add("new_you")
-                // console.log(mainWindow.classList)
-            }
-        }
         // 無人被釘選，要讓主畫面變100%
-        else {
+        if (mainWindow.style.display === "none") {
             if (attendees_quantity === 1) {
                 mainWindow.style.display = "flex"
 
@@ -118,6 +108,16 @@ function make_one_attendee(attendee) {
 
                 mainWindow.classList.remove(...mainWindow.classList)
                 mainWindow.classList.add("new_you")
+            }
+        }
+        // 被釘選的情況
+        else {
+            if (attendees_quantity === 0) {
+                othersWindow.style.display = "none"
+
+                mainWindow.classList.remove(...mainWindow.classList)
+                mainWindow.classList.add("new_you")
+                // console.log(mainWindow.classList)
             }
         }
     })
