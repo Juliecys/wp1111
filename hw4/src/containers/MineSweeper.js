@@ -18,7 +18,7 @@ const MineSweeper = () => {
 
     // Basic TODO: Change `startGame` from false to true when this function is called
     const startGameOnClick = () => {
-        
+        setStartGame(true)
     }
 
     // Advanced TODO: Change `mineNum` to the number you send by this function
@@ -39,7 +39,22 @@ const MineSweeper = () => {
     return (
         <div className='mineSweeper'>
             {/* Basic TODO: `HomePage` and `Board` will switch based on the mode of `startGame`. If `startGame` is true, show `Board`; else show `HomePage` */}
-            
+            {/* 利用條件渲染的方式決定要呈現哪個組件 */}
+            {startGame === false && (
+                <HomePage
+                    startGameOnClick = {startGameOnClick}
+                    // weatherElement={weatherElement}
+                    // moment={moment}
+                    // fetchData={fetchData}
+                />
+            )}
+
+            {startGame === true && (
+                <Board 
+                    boardSize = {boardSize}
+                    mineNum ={mineNum}
+                />
+            )}
             {/* Advanced TODO: pass all parameters into `Board` and `HomePage`*/}
             
         </div>

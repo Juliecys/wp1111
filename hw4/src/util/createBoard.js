@@ -42,7 +42,7 @@ export default (boardSize, mineNum) => {
     while (mineCount < mineNum) {
         let x = randomNum(0, boardSize - 1);
         let y = randomNum(0, boardSize - 1);
-
+        console.log(x, y)
         if (board[x][y].value === 0) {            // Check this location has not been located a mine.
             board[x][y].value = '💣';           // Change the value of the cell to '💣'
             mineLocations.push([x, y]);
@@ -52,10 +52,11 @@ export default (boardSize, mineNum) => {
 
     
     
-
+    // 計算每一格的九宮格中有幾個炸彈
     for (let r = 0; r < boardSize; r++) {
         for (let c = 0; c < boardSize; c++) {
-            if (board[r][c].value === '💣') continue;
+            if (board[r][c].value === '💣') continue; // 如果此位置是地雷就不用跑下面的，跳到下一格去看
+
             // Top
             if (r > 0 && board[r - 1][c].value === '💣') board[r][c].value++;
             // Top Right
@@ -72,7 +73,6 @@ export default (boardSize, mineNum) => {
             if (c > 0 && board[r][c - 1].value === '💣') board[r][c].value++;
             // Top Left
             if (r > 0 && c > 0 && board[r - 1][c - 1].value === '💣') board[r][c].value++;
-
         }
     }
 
