@@ -42,7 +42,6 @@ export default (boardSize, mineNum) => {
     while (mineCount < mineNum) {
         let x = randomNum(0, boardSize - 1);
         let y = randomNum(0, boardSize - 1);
-        console.log(x, y)
         if (board[x][y].value === 0) {            // Check this location has not been located a mine.
             board[x][y].value = '💣';           // Change the value of the cell to '💣'
             mineLocations.push([x, y]);

@@ -23,17 +23,19 @@ const MineSweeper = () => {
 
     // Advanced TODO: Change `mineNum` to the number you send by this function
     const mineNumOnChange = (value) => {
-        
+        setMineNum(value)
     }
 
     // Advanced TODO: Change `boardSize` to the number you send by this function
     const boardSizeOnChange = (value) => {
-        
+        setBoardSize(value)
     }
 
     // Advanced TODO: Change `startGame` from true to false when this function is called
     const backToHomeOnClick = () => {
-        
+        setStartGame(false)
+        setMineNum(10)
+        setBoardSize(8)
     }
 
     return (
@@ -43,16 +45,18 @@ const MineSweeper = () => {
             {startGame === false && (
                 <HomePage
                     startGameOnClick = {startGameOnClick}
-                    // weatherElement={weatherElement}
-                    // moment={moment}
-                    // fetchData={fetchData}
+                    mineNumOnChange = {mineNumOnChange}
+                    boardSizeOnChange = {boardSizeOnChange}
+                    mineNum = {mineNum}
+                    boardSize = {boardSize}
                 />
             )}
 
             {startGame === true && (
                 <Board 
                     boardSize = {boardSize}
-                    mineNum ={mineNum}
+                    mineNum = {mineNum}
+                    backToHome = {backToHomeOnClick}
                 />
             )}
             {/* Advanced TODO: pass all parameters into `Board` and `HomePage`*/}

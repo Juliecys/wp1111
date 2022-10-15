@@ -17,7 +17,7 @@ import React, { useEffect, useState } from 'react';
 
 const Board = ({ boardSize, mineNum, backToHome }) => {
     const [board, setBoard] = useState([]);                     // An 2-dimentional array. It is used to store the board.
-    const [nonMineCount, setNonMineCount] = useState(0);        // An integer variable to store the number of cells whose value are not '💣'.
+    const [nonMineCount, setNonMineCount] = useState(-1);        // An integer variable to store the number of cells whose value are not '💣'.
     const [mineLocations, setMineLocations] = useState([]);     // An array to store all the coordinate of '💣'.
     const [gameOver, setGameOver] = useState(false);            // A boolean variable. If true, means you lose the game (Game over).
     const [remainFlagNum, setRemainFlagNum] = useState(0);      // An integer variable to store the number of remain flags.
@@ -55,17 +55,15 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         let newBoard = JSON.parse(JSON.stringify(board));
         let newFlagNum = remainFlagNum;
 
-        if (e.type === "contextmenu" && newBoard[x][y].revealed === false) {
-            
-            if (newBoard[x][y].flagged === false && remainFlagNum > 0) 
-            {
+        if (newBoard[x][y].revealed === false) {
+
+            if (newBoard[x][y].flagged === false && remainFlagNum > 0) {
                 newBoard[x][y].flagged = true
                 newFlagNum--
                 setRemainFlagNum(newFlagNum)
                 setBoard(newBoard)
             }
-            else if (newBoard[x][y].flagged === true && remainFlagNum < mineNum)
-            {
+            else if (newBoard[x][y].flagged === true && remainFlagNum < mineNum) {
                 newBoard[x][y].flagged = false
                 newFlagNum++
                 setRemainFlagNum(newFlagNum)
@@ -75,50 +73,60 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
         // Basic TODO: Right Click to add a flag on board[x][y]
         // Remember to check if board[x][y] is able to add a flag (remainFlagNum, board[x][y].revealed)
         // Update board and remainFlagNum in the end
-
     };
 
     const revealCell = (x, y) => {
         if (board[x][y].revealed || gameOver || board[x][y].flagged) return;
         let newBoard = JSON.parse(JSON.stringify(board));
-
-        if (newBoard[x][y].value === '💣') // 點到地雷
-        {
-            newBoard[x][y].revealed = true
-            // reveal every mine
-            newBoard.map((row, i) => {
-                return (
-                    row.map((col, j) => {
-                        if (newBoard[i][j].revealed === false && newBoard[i][j].value === '💣' && newBoard[i][j].flagged === false) {
-                            newBoard[i][j].revealed = true
-                        }
-                    })
-                )
-            })
-        }
-        else { 
-            if (newBoard[x][y].value !== 0) // 點到非地雷且周圍八宮格內有地雷的格子
-            {
-                newBoard[x][y].revealed = true
-            }
-            else // 點到周圍八宮格內沒有地雷（value = 0）的格子
-            {
-                newBoard[x][y].revealed = true
-            }
-
-            // if 
-        }
-        setBoard(newBoard)
-        
-        
-        
+        let newNonMinesCount = nonMineCount
 
         // Basic TODO: Complete the conditions of revealCell (Refer to reveal.js)
         // Hint: If `Hit the mine`, check ...?
         //       Else if `Reveal the number cell`, check ...?
         // Reminder: Also remember to handle the condition that after you reveal this cell then you win the game.
 
+        if (newBoard[x][y].value === '💣') // 點到地雷
+        {
+            newBoard[x][y].revealed = true
+            // reveal every mine
+            mineLocations.map((loc) => {
+                let x = loc[0]
+                let y = loc[1]
+                if (newBoard[x][y].revealed === false && newBoard[x][y].flagged === false & newBoard[x][y].value === '💣') {
+                    newBoard[x][y].revealed = true
+                }
+            })
+            setGameOver(true)
+        }
+        else {
+            let board_mine = []
+            if (newBoard[x][y].value !== 0) // 點到非地雷且周圍八宮格內有地雷的格子
+            {
+                board_mine = revealed(newBoard, x, y, newNonMinesCount)
+                // newBoard[x][y].revealed = true
+            }
+            else // 點到周圍八宮格內沒有地雷（value = 0）的格子
+            {
+                board_mine = revealed(newBoard, x, y, newNonMinesCount)
+                // newBoard[x][y].revealed = true
+            }
+            newBoard = board_mine.board
+            newNonMinesCount = board_mine.newNonMinesCount
+        }
+        setBoard(newBoard)
+        setNonMineCount(newNonMinesCount)
     };
+
+    const isWin = () => {
+        if (nonMineCount === 0) {
+            setGameOver(true)
+            setWin(true)
+        }
+    }
+
+    useEffect(() => {
+        isWin()
+    }, [nonMineCount]);
 
     return (
         <div className='boardPage' >
@@ -126,7 +134,14 @@ const Board = ({ boardSize, mineNum, backToHome }) => {
                 {/* <h1>This is the board Page!</h1>  This line of code is just for testing. Please delete it if you finish this function. */}
 
                 {/* Advanced TODO: Implement Modal based on the state of `gameOver` */}
-
+                {gameOver ?
+                    (<Modal
+                        restartGame={restartGame}
+                        backToHome={backToHome}
+                        win={win}
+                    />) : (<div></div>)
+                }
+                {/* {console.log(gameOver)} */}
                 {/* Basic TODO: Implement Board 
                 Useful Hint: The board is composed of BOARDSIZE*BOARDSIZE of Cell (2-dimention). So, nested 'map' is needed to implement the board.
                 Reminder: Remember to use the component <Cell> and <Dashboard>. See Cell.js and Dashboard.js for detailed information. */}
