@@ -17,14 +17,9 @@ export default function Dashboard({ remainFlagNum, gameOver }) {
   // Advanced TODO: Implement the timer on the Dashboard
   {/* Useful Hint: Try to understand the difference between time and sTime. */ }
 
-  // 計時器，每過一秒讓 time = time + 1
   useEffect(() => {
     console.log(time)
   }, [time])
-  // var timer = setInterval(TimerFunction, 1000)
-  // // if (gameOver === true) {
-  // //   clearInterval(timer)
-  // // }
 
   const StopTimer = () => {
     let stopTime = time
@@ -34,28 +29,21 @@ export default function Dashboard({ remainFlagNum, gameOver }) {
     }
   }
 
+
+  useEffect(() => {
+    if (gameOver){
+      clearInterval(timeIntervalId)
+      setTime(0)
+      console.log('gameOver', gameOver, time)
+      StopTimer()
+    }
   
-
-  useEffect(() => {
-    clearInterval(timeIntervalId)
-    setTime(0)
-    console.log('gameOver', gameOver, time)
-    StopTimer()
-  }, [gameOver]);
-
-  useEffect(() => {
-    if (gameOver)
-      return
-    timeIntervalId = setInterval(() => setTime(time => time + 1), 1000)
-    return () => clearInterval(timeIntervalId)
+    else // 計時器，每過一秒讓 time = time + 1
+    {
+      timeIntervalId = setInterval(() => setTime(time => time + 1), 1000)
+    }
+    // return () => clearInterval(timeIntervalId)
   }, [gameOver])
-
-  // useEffect(() => {
-  //   clearInterval(timer)
-  // }, [time]);
-
-
-
 
   return (
     <div className="dashBoard" >
