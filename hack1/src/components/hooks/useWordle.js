@@ -69,6 +69,11 @@ const useWordle = (solution) => {
                         let theChar = curGuess[i]
                         tempUsedChars.push({theChar: 'yellow'})
                         setUsedChars(tempUsedChars)
+                        
+                        let tempArray = SolutionLettersSet.filter(function(value, index, arr){ 
+                            return value !== solution[i];
+                        });
+                        setSolutionLettersSet(tempArray)
                     }
                 }
             }
