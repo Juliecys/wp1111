@@ -17,8 +17,9 @@ const useWordle = (solution) => {
     const [guesses, setGuesses] = useState([...Array(6)]);          // An array whose length is 6. (Ex: [[{char:'c', color:'grey'},{char:'o', color:'grey'},{char:'d', color:'grey'},{char:'e', color:'yellow'},{char:'s', color:'grey'}],[],[],[],[],[]])
 
     // let SolutionLetters = solution
-    const [SolutionLettersSet, setSolutionLettersSet] = useState(solution.split(""))
-    // console.log(solution[0])
+    // let SolutionLettersSet = solution.split("")
+    const [SolutionLettersSet, setSolutionLettersSet] = useState([])
+    // setSolutionLettersSet(solution)
 
     // You can use this function to print all the parameters you want to know.
     const printTest = () => {
@@ -34,6 +35,8 @@ const useWordle = (solution) => {
 
     // Handle the actions of `Enter`
     const handleEnter = () => {
+        setSolutionLettersSet(solution)
+        console.log(SolutionLettersSet)
         // (1) Enter is invalid if turn > 5
         if (turn > 5) {
             console.log("Error: You have used all your guesses");
@@ -45,44 +48,71 @@ const useWordle = (solution) => {
             return;
         }
         // (3) Press Enter, store curGuess to guesses, reset curGuess and update parameters .
-        
+
         // console.log("Press Enter!!!! Store and reset curGuess!");
         // TODO 4: Check each wordbox's color in `curGuess` and update `guess`, `turn` and `curGuess`
         // Hint: check green first, and then check yellow.
-        
+
         for (let i = 0; i < curGuess.length; i++) {
             if (curGuess[i] === solution[i]) {
                 let tempUsedChars = usedChars
                 let theChar = curGuess[i]
-                tempUsedChars.push({theChar: 'green'})
+                tempUsedChars[theChar] = 'green'
                 setUsedChars(tempUsedChars)
 
-                let tempArray = SolutionLettersSet.filter(function(value, index, arr){ 
-                    return value !== solution[i];
-                });
+                const tempArray = SolutionLettersSet.filter(value => value !== solution[i])
+                // let tempArray = SolutionLettersSet.filter((value, index, arr) => {
+                //     return value !== solution[i];
+                // });
                 setSolutionLettersSet(tempArray)
             }
             else {
-                for (let j = 0; j < solution.length; j++) {
+                // let repeat = {}
+                // for (let j = 0; j < solution.length; j++)
+                // {
+                //     let repeatTime = 1
+                //     for (let k = 0; k < solution.length; k++) {
+                //         if (solution[j] === solution[k]) {
+                //             repeatTime++
+                //         }
+                //     }
+                //     if (repeatTime > 1){
+                //         let RepeatLetter = solution[j]
+                //         repeat.push({RepeatLetter: repeatTime})
+                //     }
+                // }
+                for (let j = 0; j < solution.length; j++) // 未完成重複字
+                {
                     if (curGuess[i] === solution[j]) {
                         let tempUsedChars = usedChars
                         let theChar = curGuess[i]
-                        tempUsedChars.push({theChar: 'yellow'})
+                        tempUsedChars[theChar] = 'yellow'
                         setUsedChars(tempUsedChars)
-                        
-                        let tempArray = SolutionLettersSet.filter(function(value, index, arr){ 
-                            return value !== solution[i];
-                        });
+
+                        const tempArray = SolutionLettersSet.filter(value => value !== solution[i])
+                        // let tempArray = SolutionLettersSet.filter((value, index, arr) => { 
+                        //     return value !== solution[i];
+                        // });
                         setSolutionLettersSet(tempArray)
+                    }
+                    else {
+                        let tempUsedChars = usedChars
+                        let theChar = curGuess[i]
+                        tempUsedChars[theChar] = 'grey'
+                        setUsedChars(tempUsedChars)
                     }
                 }
             }
         }
-        
-        
 
         // add the formatted guess generated into guesses.
-        
+        let tempGuess = guesses
+        let temp
+        for (let index = 0; index < curGuess.length; index++) {
+            temp.push({char:curGuess[index], color:usedChars[curGuess[index]]})
+        }
+        tempGuess[turn] = temp
+        setGuesses(tempGuess)
 
         // turn += 1
         setTurn(turn => turn + 1)

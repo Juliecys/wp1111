@@ -25,6 +25,13 @@ const Board = ({ turn, guesses, curGuess }) => {
                         />
                     );
                 }
+                else if (rowIdx <= turn){
+                    return (
+                        <Row id={'row_' + rowIdx} key={'row_' + rowIdx} 
+                            guess={guesses} rowIdx={rowIdx} 
+                        />
+                    );
+                }
                 else {
                     return (
                         <Row id={'row_' + rowIdx} key={'row_' + rowIdx} 
