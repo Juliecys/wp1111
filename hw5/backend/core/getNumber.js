@@ -11,12 +11,11 @@ let answer = 0
 
 const genNumber = () => {
     answer = getRandomIntInclusive(min_number, max_number)
-    return ( answer );
+    // return ( answer );
 }
 
 const getNumber = () => {
     return ( answer );
 }
 
-
-export default {genNumber, getNumber};
+export {genNumber, getNumber};

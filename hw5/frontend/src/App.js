@@ -17,6 +17,9 @@ function App() {
       setStatus(response)
       setNumber('')
     }
+    // console.log('guess!')
+    // console.log(number)
+    // console.log(response)
   }
 
   // useEffect(() => {
@@ -47,7 +50,7 @@ function App() {
       <p>you won! the number was {number}.</p>
       <button 
       // Handle restart for backend and frontend 
-        onClick={async () => {setHasWon(false); await restart()}}
+        onClick={async () => {setHasWon(false); setStatus(''); await restart()}}
       >restart</button>
     </>)
 
