@@ -13,7 +13,6 @@ router.post('/start', (_, res) => {
 
 router.get('/guess', (req, res) => {
     // 去 (memory) DB 拿答案的數字
-    
 
     // 用 req.query.number 拿到前端輸入的數字
     let theGuess = req.query.number
