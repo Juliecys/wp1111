@@ -5,6 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "cd frontend && yarn start",
-    "server": "cd backend && yarn server"  
+    "server": "cd backend && yarn server"
+  },
+  "dependencies": {
+    "antd": "^5.0.1"
   }
 }
