@@ -12,13 +12,13 @@ import '../css/navigationBar.css'
 import Filter from './filter';
 import { MdTune, MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const NavBar = () => {
 
     const [priceFilter, setPriceFilter] = useState([])
     const [mealFilter, setMealFilter] = useState([])
     const [typeFilter, setTypeFilter] = useState([])
-
     const [display, setDisplay] = useState("")
     const options = ["price", "distance"];
     const [sortMethod, setSortMethod] = useState(options[0]);
@@ -41,10 +41,10 @@ const NavBar = () => {
         // FIXME - Modify below
         navigate('/search', {
             state: {
-                priceFilter: undefined,
-                mealFilter: undefined,
-                typeFilter: undefined,
-                sortBy: undefined
+                priceFilter: priceFilter,
+                mealFilter: mealFilter,
+                typeFilter: typeFilter,
+                sortBy: sortMethod
             }
         });
 

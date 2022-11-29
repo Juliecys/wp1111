@@ -29,14 +29,12 @@ exports.GetSearch = async (req, res) => {
 
     // Info.collection.find({price: priceFilter, tag: [mealFilter, typeFilter]}).exec((err, data) => {
     
-    Info.collection.find().exec((err, data) => {
+    Info.find({price:priceFilter, tag:[mealFilter, typeFilter]}).exec((err, data) => {
         if (err) {
-            res.status(403)
-            res.send({ message: 'error', restaurant_list: data })
+            res.status(403).send({ message: 'error', contents:[], restaurant_list: data })
         }
         else {
-            res.status(200)
-            res.send({ message: 'success', restaurant_list: data })
+            res.status(200).send({ message: 'success', contents:[], restaurant_list: data })
         }
     });
 

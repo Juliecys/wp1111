@@ -20,19 +20,17 @@ const SearchPage = () => {
     const [restaurants, setRestaurant] = useState([])
     const getRestaurant = async () => {
         // TODO Part I-3-b: get information of restaurants from DB
-        // console.log(state)
 
         let queryState = state
         const {
             data: { message, restaurant_list },
-        } = await axios.get('/api/getSearch', {
+        } = await instance.get('/getSearch', {
             params:{
                 queryState
             }
         })
-        console.log(restaurant_list.contents)
-
-        // setRestaurant(restaurant_list.contents)
+        console.log(restaurant_list)
+        setRestaurant(restaurant_list)
     }
 
     useEffect(() => {
@@ -40,7 +38,7 @@ const SearchPage = () => {
     }, [state.priceFilter, state.mealFilter, state.typeFilter, state.sortBy])
 
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const ToRestaurant = (id) => {
         // TODO Part III-1: navigate the user to restaurant page with the corresponding id
     }
@@ -66,10 +64,10 @@ const SearchPage = () => {
                                 <div className='title'>
                                     <p className='name'> {item.name} </p>
                                     <p className='price'> {getPrice(item.price)} </p>
-                                    <p className='distance'> {item.distance/1000} </p>
+                                    <p className='distance'> {item.distance/1000}km </p>
                                     {/* change to km */}
                                 </div>
-                                <p className='description'> {item.tag} </p>
+                                <p className='description'> {item.tag.toString()} </p>
                             </div>
                         </div>
 
