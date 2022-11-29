@@ -32,6 +32,11 @@ const ChatProvider = (props) => {
         }
     }, [me, signedIn]);
 
+    useEffect(() =>{
+        console.log("messages:")
+        console.log(messages)
+    }, [messages])
+
     client.onmessage = (byteString) => {
         const { data } = byteString;
         const [task, payload] = JSON.parse(data);
@@ -71,10 +76,17 @@ const ChatProvider = (props) => {
             payload: { name, to }
         });
     }
-
-    const sendMessage = (name, to, body) => {
-        if (!name || !to || !body) {
-            throw new Error('name or to or body required.')
+    
+    const sendMessage = ({name, to, body}) => {
+        if ( !name ) {
+            throw new Error('name required.')
+        }
+        if ( !to ) {
+            console.log("to =", to)
+            throw new Error('to required.')
+        }
+        if ( !body ) {
+            throw new Error('body required.')
         }
         sendData({
             type: "MESSAGE",

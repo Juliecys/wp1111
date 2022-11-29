@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useChat } from './hooks/useChat'
 import Title from '../components/Title';
 import Message from '../components/Message';
+import ChatModal from '../components/ChatModal';
 
 // 改自 App.css 裡頭的 .App-messages
 const ChatBoxesWrapper = styled.div`
@@ -16,12 +17,12 @@ const ChatBoxesWrapper = styled.div`
     overflow: auto;
 }`;
 
-// const ChatBoxWrapper = styled.div`
-//     height: calc(240px - 36px);
-//     display: flex;
-//     flex-direction: column;
-//     overflow: auto;
-// `
+const ChatBoxWrapper = styled.div`
+    height: calc(240px - 36px);
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+`
 
 const FootRef = styled.div` 
     height: 20px;
@@ -38,7 +39,7 @@ function ChatRoom() {
     const bodyRef = useRef(null)
 
     const [chatBoxes, setChatBoxes] = useState([]); // { label, children, key }
-    const [activeKey, setActiveKey] = useState(); // 目前被點選的 chatbox
+    const [activeKey, setActiveKey] = useState(""); // 目前被點選的 chatbox
     const [modalOpen, setModalOpen] = useState(false);
 
     const scrollToBottom = () => {
@@ -65,69 +66,70 @@ function ChatRoom() {
     // )
 
     // 產生 chat 的 DOM nodes
-    // const renderChat = (chat) => {
-    //     return (
-    //         chat.length === 0 ? (
-    //             // Initial or when cleared
-    //             <p style={{ color: '#ccc' }}> No messages... </p>
-    //         ) : (
-    //             // Print each message: { name, textBody }
-    //             chat.map(({ name, body }, i) => {
-    //                 let isMe = false
-    //                 if (name === me) {
-    //                     isMe = true
-    //                 }
-    //                 return <Message key={i} isMe={isMe} message={body} />
-    //             })
-    //         ))
-    // };
+    const displayChat = (chat) => {
+        console.log("display chat!")
+        console.log("chat:", chat)
+        return (
+            chat.length === 0 ? (
+                <p style={{ color: '#ccc' }}> No message... </p>
+            ) : (
+                <ChatBoxWrapper>
+                    {
+                        chat.map(({ name, body }, i) => {
+                            return (<Message isMe={name === me} message={body} key={i} />)
+                        })
+                    }
+                    <FootRef ref={msgFooter} />
+                </ChatBoxWrapper>
+            )
+        )
+    }
+    const handleUpdate = (index, chat) => {
+        const newChatBoxes = [...chatBoxes];
+        console.log("newChatBoxes =", newChatBoxes)
+        newChatBoxes[index].children = chat;
+        setChatBoxes(newChatBoxes);
+    }
+
+    useEffect(() => {
+        if (activeKey !== "") {
+            const result = chatBoxes.findIndex(item => item.key === activeKey);
+            if (result === -1) {
+                setChatBoxes([...chatBoxes,
+                {
+                    label: activeKey,
+                    children: displayChat(messages),
+                    key: activeKey
+                }]);
+            }
+            else {
+                handleUpdate(result, displayChat(messages))
+            }
+        }
+    }, [messages]);
+
+
     // const extractChat = (friend) => {
-    //     return renderChat
-    //         (messages.filter
-    //             (({ name, body }) => ((name === friend) || (name === me))));
+    //     // return displayChat
+    //     //     (messages.filter
+    //     //         (({ name, to, body }) => ((name === friend) && (to === me)) || ((name === me) && (to === friend))));
+    //     // (({ name, to, body }) => ((name === friend) || (name === me))));
+    //     console.log("extractChat messages:", messages)
+    //     return displayChat(messages)
     // }
 
-    const ChatModal = ({ open, onCreate, onCancel }) => {
-        const [form] = Form.useForm();
-        return (
-            <Modal
-                open={open}
-                title="Create a new chat room"
-                okText="Create"
-                cancelText="Cancel"
-                // Cancel 按鈕
-                onCancel={onCancel}
-                // Create 按鈕
-                onOk={() => {
-                    form
-                        .validateFields()
-                        .then((values) => {
-                            form.resetFields();
-                            onCreate(values);
-                        })
-                        .catch((e) => {
-                            window.alert(e);
-                        });
-                }}
-            >
-                <Form form={form} layout="vertical"
-                    name="form_in_modal">
-                    <Form.Item
-                        name="name"
-                        label="Name"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Error: Please enter the name of the person to chat!',
-                            },
-                        ]}
-                    >
-                        <Input />
-                    </Form.Item>
-                </Form >
-            </Modal >
-        );
-    };
+    const renderChat = (friend) => {
+        console.log("before")
+        const chat = displayChat(messages);
+        console.log("after")
+
+        setChatBoxes([...chatBoxes,
+        {
+            label: friend,
+            children: chat,
+            key: friend
+        }]);
+    }
 
     const createChatBox = (friend) => {
         if (chatBoxes.some
@@ -135,14 +137,9 @@ function ChatRoom() {
             throw new Error(friend +
                 "'s chat box has already opened.");
         }
-        // const chat = extractChat(friend);
-        const chat = startChat(me, friend);
-        setChatBoxes([...chatBoxes,
-        {
-            label: friend,
-            children: chat,
-            key: friend
-        }]);
+        // startChat(me, friend);
+        // renderChat(friend)
+
         // For scrollToBottom()
         setMsgSent(true);
         return friend;
@@ -172,9 +169,10 @@ function ChatRoom() {
                         tabBarStyle={{ height: '36px' }}
                         type="editable-card"
                         onChange={(key) => {
+                            startChat(me, key);
                             setActiveKey(key);
                             // extractChat(key);
-                            startChat(me, key);
+                            // displayChat(messages) // initial chatroom messages
                         }}
                         onEdit={(targetKey, action) => {
                             if (action === 'add') setModalOpen(true);
@@ -185,9 +183,9 @@ function ChatRoom() {
                         activeKey={activeKey}
                         items={chatBoxes}
                     />
-                    <>
+                    {/* <>
                         <FootRef ref={msgFooter} />
-                    </>
+                    </> */}
                 </ChatBoxesWrapper>
                 {/* {displayMessages()} */}
 
@@ -195,16 +193,19 @@ function ChatRoom() {
                     open={modalOpen}
                     // 按下 Create 後的動作
                     onCreate={({ name }) => {
-                        setActiveKey(createChatBox(name));
-                        // extractChat(name);
                         startChat(me, name)
+                        console.log("opening", createChatBox(name))
+
+                        setActiveKey(createChatBox(name));
                         setModalOpen(false);
+                        // console.log("!!! create", messages)
+                        // displayChat(messages);
                     }}
                     // 按下 Cancel 後的動作
                     onCancel={() => { setModalOpen(false); }}
                 />
             </>
-            
+
             <Input.Search
                 // Save and store the textBody
                 ref={bodyRef}
@@ -223,8 +224,7 @@ function ChatRoom() {
                         })
                         return
                     }
-
-                    sendMessage({ name: me, body: msg })
+                    sendMessage({ name: me, to: activeKey, body: msg })
                     setBody('')
                 }}
             ></Input.Search>

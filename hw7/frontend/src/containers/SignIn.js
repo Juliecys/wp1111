@@ -10,7 +10,9 @@ const SignIn = () => {
                 type: "error",
                 msg: "Missing user name",
             });
-        else setSignedIn(true);
+        else {
+            setSignedIn(true);
+        }
     }
     return (
         <>
