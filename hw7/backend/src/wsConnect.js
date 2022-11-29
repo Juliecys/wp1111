@@ -95,7 +95,7 @@ export default {
 
                     let init_messages = []
                     const Box = await TheChatBox.populate({ path: 'messages', populate: 'sender' })
-                    // console.log(Box.messages)
+                    console.log(TheChatBox)
                     Box.messages.map((e) => {
                         init_messages.push({ name: e.sender.name, body: e.body })
                     })

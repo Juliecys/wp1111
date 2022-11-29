@@ -105,6 +105,7 @@ function ChatRoom() {
             else {
                 handleUpdate(result, displayChat(messages))
             }
+            setMsgSent(true);
         }
     }, [messages]);
 
@@ -118,18 +119,18 @@ function ChatRoom() {
     //     return displayChat(messages)
     // }
 
-    const renderChat = (friend) => {
-        console.log("before")
-        const chat = displayChat(messages);
-        console.log("after")
+    // const renderChat = (friend) => {
+    //     console.log("before")
+    //     const chat = displayChat(messages);
+    //     console.log("after")
 
-        setChatBoxes([...chatBoxes,
-        {
-            label: friend,
-            children: chat,
-            key: friend
-        }]);
-    }
+    //     setChatBoxes([...chatBoxes,
+    //     {
+    //         label: friend,
+    //         children: chat,
+    //         key: friend
+    //     }]);
+    // }
 
     const createChatBox = (friend) => {
         if (chatBoxes.some
@@ -194,7 +195,7 @@ function ChatRoom() {
                     // 按下 Create 後的動作
                     onCreate={({ name }) => {
                         startChat(me, name)
-                        console.log("opening", createChatBox(name))
+                        // console.log("opening", createChatBox(name))
 
                         setActiveKey(createChatBox(name));
                         setModalOpen(false);
