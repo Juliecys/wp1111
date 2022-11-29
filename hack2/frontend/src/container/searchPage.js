@@ -64,10 +64,10 @@ const SearchPage = () => {
                                 <div className='title'>
                                     <p className='name'> {item.name} </p>
                                     <p className='price'> {getPrice(item.price)} </p>
-                                    <p className='distance'> {item.distance/1000}km </p>
+                                    <p className='distance'> {(item.distance)/1000} km </p>
                                     {/* change to km */}
                                 </div>
-                                <p className='description'> {item.tag.toString()} </p>
+                                <p className='description'> {item.tag.join(",")} </p>
                             </div>
                         </div>
 
