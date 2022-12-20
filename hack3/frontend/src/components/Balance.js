@@ -4,6 +4,7 @@ import Paper from '@mui/material/Paper';
 import Title from './Title';
 
 function Balance({ items }) {
+//   console.log("Balance js7:", items)
   const total = items.reduce((acc, item) => {
     if (item.category === 'INCOME') {
       return acc + item.amount;

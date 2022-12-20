@@ -2,21 +2,18 @@ import { gql } from '@apollo/client';
 
 // TODO 3.1 Mutation - Update item
 export const CREATE_ITEM_MUTATION = gql`
-  mutation CreateItem($input: CreateItemInput!) {
-    createItem(
-      data:{
-        name: $name
-        amount: $amount
-        category: $category
-        date: $date
-        description: $description
-      }
-    ){
+  mutation CreateItem(
+    $name: String!
+    $amount: Int!
+    $category: String!
+    $date: Time!
+    $description: String!
+  ) {
+    createItem(input: $input) {
         name
         category
         date
         description
-      }
     }
   }
 `;
