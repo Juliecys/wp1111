@@ -4,7 +4,7 @@ import { dataInit } from "./upload.js";
 import "dotenv-defaults/config.js";
 // edit by me
 import dotenv from 'dotenv-defaults';
-// require('dotenv').config()
+
 
 mongoose.set("strictQuery", true);
 
