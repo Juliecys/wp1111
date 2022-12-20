@@ -11,7 +11,7 @@ function Analytics() {
   const {
     loading, error, data: itemsData, subscribeToMore,
   } = useQuery(GET_ITEMS_QUERY);
-  const items = itemsData.items
+  const { items } = itemsData
   // TODO 2.2 End
 
 
