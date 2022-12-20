@@ -7,14 +7,17 @@ import Category from './Category';
 
 function Analytics() {
   // TODO 2.2 Use the useQuery hook to get items from backend
-  const { loading, error, data } = useQuery(GET_ITEMS_QUERY);
-  const items = data.items
+  // const { loading, error, data } = useQuery(GET_ITEMS_QUERY);
+  const {
+    loading, error, data: itemsData, subscribeToMore,
+  } = useQuery(GET_ITEMS_QUERY);
+  const items = itemsData.items
   // TODO 2.2 End
 
 
   return (
     <div className="grid grid-cols-12 gap-6">
-      { 
+      {
         // TODO 2.3 Add Balence and Category (uncomment the following code)
       }
       <div className="col-span-6">
