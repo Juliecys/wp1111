@@ -6,7 +6,7 @@ export const CREATE_ITEM_MUTATION = gql`
     $name: String!
     $amount: Int!
     $category: String!
-    $date: Time!
+    $date: String!
     $description: String!
   ) {
     createItem(
