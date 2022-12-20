@@ -54,10 +54,12 @@ const createMessage = async (name, to, msg) => {
 const sendData = (data, ws) => { ws.send(JSON.stringify(data)); }
 const sendStatus = (payload, ws) => { sendData(["status", payload], ws); }
 // Send message to every client
-const broadcastMessage = (wss, data, status) => {
+const broadcastMessage = (wss, ws, data, status) => {
     wss.clients.forEach((client) => {
-        sendData(data, client);
-        sendStatus(status, client);
+        if (ws.box == client.box) {
+            sendData(data, client);
+            sendStatus(status, client);
+        }
     });
 };
 
@@ -73,7 +75,7 @@ export default {
     //         });
     // },
 
-    onMessage: (wss, ws) => (
+    onMessage: (wss, ws) => {
         async (byteString) => {
             // console.log("byte:", byteString);
             const { data } = byteString
@@ -99,7 +101,7 @@ export default {
                     Box.messages.map((e) => {
                         init_messages.push({ name: e.sender.name, body: e.body })
                     })
-                    
+                    ws.box = makeName(name, to)
                     // console.log(init_messages)
                     sendData(["init", init_messages], ws);
 
@@ -113,8 +115,10 @@ export default {
                     const message = createMessage(name, to, body)
                     const frontend_payload = { name, body }
                     // Respond to client
+                    ws.box = makeName(name, to)
                     broadcastMessage(
                         wss,
+                        ws,
                         ['output', [frontend_payload]],
                         {
                             type: 'success',
@@ -128,6 +132,7 @@ export default {
                     Message.deleteMany({}, () => {
                         broadcastMessage(
                             wss,
+                            ws,
                             ['cleared'],
                             {
                                 type: 'info',
@@ -173,5 +178,5 @@ export default {
                 default: break
             }
         }
-    )
+    }
 }

@@ -51,20 +51,6 @@ function ChatRoom() {
         setMsgSent(false);
     }, [msgSent]);
 
-    // const displayMessages = () => (
-    //     messages.length === 0 ? (
-    //         // Initial or when cleared
-    //         <p style={{ color: '#ccc' }}> No messages... </p>
-    //     ) : (
-    //         // Print each message: { name, textBody }
-    //         messages.map(({ name, body }, i) => (
-    //             <p className="App-message" key={i}>
-    //                 <Tag color="blue">{name}</Tag> {body}
-    //             </p>
-    //         ))
-    //     )
-    // )
-
     // 產生 chat 的 DOM nodes
     const displayChat = (chat) => {
         console.log("display chat!")
@@ -109,39 +95,12 @@ function ChatRoom() {
         }
     }, [messages]);
 
-
-    // const extractChat = (friend) => {
-    //     // return displayChat
-    //     //     (messages.filter
-    //     //         (({ name, to, body }) => ((name === friend) && (to === me)) || ((name === me) && (to === friend))));
-    //     // (({ name, to, body }) => ((name === friend) || (name === me))));
-    //     console.log("extractChat messages:", messages)
-    //     return displayChat(messages)
-    // }
-
-    // const renderChat = (friend) => {
-    //     console.log("before")
-    //     const chat = displayChat(messages);
-    //     console.log("after")
-
-    //     setChatBoxes([...chatBoxes,
-    //     {
-    //         label: friend,
-    //         children: chat,
-    //         key: friend
-    //     }]);
-    // }
-
     const createChatBox = (friend) => {
         if (chatBoxes.some
             (({ key }) => key === friend)) {
             throw new Error(friend +
                 "'s chat box has already opened.");
         }
-        // startChat(me, friend);
-        // renderChat(friend)
-
-        // For scrollToBottom()
         setMsgSent(true);
         return friend;
     };
