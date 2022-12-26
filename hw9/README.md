@@ -12,4 +12,4 @@ https://wp1111-hw9-production-27f5.up.railway.app
 ### 求情環節
 * 拜託給我 pass 吧 ><
 * Hack 分數都非常淒慘的學分乞丐需要你的救援 QQ
-* 祝好心人 GPA 4.3  一生平安
+* 祝好心人 GPA 4.3  一生平安!!!
